@@ -1,0 +1,308 @@
+/* Estilos específicos da página Java */
+.tutorial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.back-button {
+    display: inline-block;
+    background: #ff4500;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    font-family: 'Orbitron', monospace;
+    cursor: pointer;
+    border: none;
+}
+
+.back-button:hover {
+    background: #ffd700;
+    transform: translateX(-5px);
+}
+
+.tech-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tech-header h1 {
+    font-size: 3rem;
+    color: #ff4500;
+    font-family: 'Bangers', cursive;
+    text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+}
+
+.tech-header .icon {
+    font-size: 4rem;
+}
+
+/* Categorias principais (cards grandes) */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.category-card {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #ff4500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 69, 0, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.category-card:hover::before {
+    left: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    border-color: #ffd700;
+    box-shadow: 0 10px 30px rgba(255, 69, 0, 0.4);
+}
+
+.category-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.category-card h2 {
+    font-size: 1.8rem;
+    color: #ff8c00;
+    font-family: 'Bangers', cursive;
+    margin-bottom: 0.5rem;
+}
+
+.category-card p {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+}
+
+.category-progress {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #ffd700;
+}
+
+/* Sub-cards (tópicos dentro da categoria) */
+.sub-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.sub-card {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 15px;
+    padding: 1.5rem;
+    cursor: pointer;
+    border-left: 5px solid #ff4500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sub-card:hover {
+    transform: translateX(10px);
+    border-left-color: #ffd700;
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+}
+
+.sub-card.completed {
+    border-left-color: #00ff00;
+    opacity: 0.8;
+}
+
+.sub-card.completed::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #00ff00;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sub-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.sub-card h3 {
+    font-size: 1.3rem;
+    color: #ff8c00;
+    margin-bottom: 0.5rem;
+    font-family: 'Bangers', cursive;
+}
+
+.sub-card p {
+    color: #aaaaaa;
+    font-size: 0.85rem;
+}
+
+/* Conteúdo do tópico */
+.content-card {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-left: 5px solid #ff4500;
+}
+
+.content-title {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-family: 'Bangers', cursive;
+}
+
+.content-explanation {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.code-block {
+    background: #0a0a0a;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    border: 1px solid #ff4500;
+    position: relative;
+}
+
+.code-block pre {
+    color: #ff8c00;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff4500;
+    border: none;
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.copy-btn:hover {
+    background: #ffd700;
+}
+
+.tip {
+    background: rgba(255, 69, 0, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 3px solid #ffd700;
+}
+
+.tip strong {
+    color: #ffd700;
+}
+
+.mark-complete-btn {
+    background: #ff4500;
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s;
+    font-family: 'Orbitron', monospace;
+}
+
+.mark-complete-btn:hover {
+    background: #ffd700;
+    transform: scale(1.05);
+}
+
+.mark-complete-btn.completed {
+    background: #00aa00;
+    color: #fff;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff4500, transparent);
+    margin: 2rem 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.category-card, .sub-card, .content-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .tutorial-container {
+        padding: 1rem;
+    }
+    
+    .tech-header h1 {
+        font-size: 2rem;
+    }
+    
+    .category-card h2 {
+        font-size: 1.4rem;
+    }
+    
+    .category-icon {
+        font-size: 3rem;
+    }
+    
+    .content-title {
+        font-size: 1.5rem;
+    }
+    
+    .code-block pre {
+        font-size: 0.7rem;
+    }
+}
