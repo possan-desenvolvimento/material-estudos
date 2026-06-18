@@ -3,46 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Scorpion's Code | Get Over Here!</title>
+    <title>F1 Code | Hamilton's Garage</title>
     <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@400;700;900&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Efeito de fogo no fundo -->
-    <div class="fire-overlay"></div>
+    <!-- Overlay escuro para a imagem de fundo -->
+    <div class="bg-overlay"></div>
     
-    <!-- Header com tema MK -->
+    <!-- Header com tema F1 -->
     <header>
         <div class="logo">
-            <h1>🔥 SCORPION'S <span>CODE</span> 🔥</h1>
-            <p class="tagline">"GET OVER HERE... AND LEARN TO CODE!"</p>
+            <h1>🏎️ F1 <span>CODE</span></h1>
+            <p class="tagline">"HAMILTON'S GARAGE — APRENDA A PROGRAMAR COMO UM CAMPEÃO"</p>
         </div>
+        <div class="ferrari-badge">🏁 SF-25</div>
     </header>
 
-    <!-- Hero section com Scorpion -->
+    <!-- Hero section com o carro -->
     <section class="hero">
         <div class="hero-content">
             <h2>DOMINE AS TECNOLOGIAS</h2>
-            <p>Do básico ao avançado, queime seus limites e se torne um verdadeiro <strong>Shirai Ryu da programação</strong></p>
+            <p>Do básico ao avançado, acelere seus limites e se torne um verdadeiro <strong>piloto da programação</strong></p>
+            <div class="hero-flags">
+                <span>🏁</span>
+                <span>🏎️</span>
+                <span>🏁</span>
+            </div>
         </div>
         
-        <!-- Boneco do Scorpion + Kunai -->
-        <div class="scorpion-fighter">
-            <div class="scorpion-shadow"></div>
-            <div class="scorpion-silhouette">
-                🥷🔥
+        <!-- Carro da Ferrari - LEWIS HAMILTON -->
+        <div class="ferrari-car-container">
+            <div class="ferrari-car-wrapper">
+                <img 
+                    src="https://sportbuzz.com.br/wp-content/uploads/2025/01/f1-hamilton-e-seu-primeiro-dia-de-testes-na-ferrari.jpg" 
+                    alt="Lewis Hamilton na Ferrari F1" 
+                    class="ferrari-car-image"
+                    id="ferrariCar"
+                    loading="lazy"
+                >
+                <div class="car-overlay">
+                    <span class="car-number">44</span>
+                    <span class="car-driver">LEWIS HAMILTON</span>
+                </div>
+                <div class="car-shine"></div>
             </div>
-            <div class="spear">
-                <div class="chain"></div>
-                <div class="kunai">🗡️</div>
-            </div>
-            <div class="fire-blast"></div>
+            <div class="ferrari-text">🇮🇹 SCUDERIA FERRARI</div>
         </div>
     </section>
 
     <!-- Grid de cards -->
     <main>
-        <h2 class="section-title">⚔️ SEU TORNEIO DE CÓDIGO ⚔️</h2>
+        <h2 class="section-title">🏁 SUA GRADE DE LARGADA 🏁</h2>
         <div class="cards-grid" id="cardsGrid">
             <!-- Os cards serão inseridos via JS -->
         </div>
@@ -50,8 +62,13 @@
 
     <!-- Footer -->
     <footer>
-        <p>🔥 Flawless Victory — Seu conhecimento, sua jornada 🔥</p>
-        <p class="small">"To honor the Lin Kuei, you must first defeat your own limitations" - Scorpion</p>
+        <p>🏁 Pole Position — Seu conhecimento, sua vitória 🏁</p>
+        <p class="small">"In the end, it's not about the car, it's about the driver" — Lewis Hamilton</p>
+        <div class="footer-flags">
+            <span>🏎️</span>
+            <span>🏆</span>
+            <span>🏎️</span>
+        </div>
     </footer>
 
     <script src="js/index.js"></script>
