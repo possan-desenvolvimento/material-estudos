@@ -12,49 +12,49 @@ const tecnologias = [
         icone: "🍃",
         descricao: "Framework poderoso para APIs e microsserviços",
         status: "⚡ Velocidade máxima!",
-        link: "#"
+        link: "./pages/spring-boot.html"
     },
     {
         nome: "Maven",
         icone: "📦",
         descricao: "Gerenciador de dependências e build automation",
         status: "🏗️ Construa como um campeão",
-        link: "#"
+        link: "./pages/maven.html"
     },
     {
         nome: "JavaScript",
         icone: "🟡",
         descricao: "A alma da interatividade web",
         status: "🎯 Na mira da vitória!",
-        link: "#"
+        link: "./pages/javascript.html"
     },
     {
         nome: "HTML",
         icone: "🌐",
         descricao: "Estrutura e semântica da web",
         status: "🕸️ O chassi do seu carro",
-        link: "#"
+        link: "./pages/html.html"
     },
     {
         nome: "CSS",
         icone: "🎨",
         descricao: "Estilização e design responsivo",
         status: "🔥 Pintura da Ferrari",
-        link: "#"
+        link: "./pages/css.html"
     },
     {
         nome: "PostgreSQL",
         icone: "🐘",
         descricao: "Banco relacional avançado e confiável",
         status: "🗡️ Dados afiados",
-        link: "#"
+        link: "./pages/postgresql.html"
     },
     {
         nome: "Redis",
         icone: "⚡",
         descricao: "Banco em memória de altíssima performance",
         status: "💨 Pit Stop rápido!",
-        link: "#"
+        link: "./pages/redis.html"
     },
     {
         nome: "Docker",
@@ -68,14 +68,14 @@ const tecnologias = [
         icone: "📜",
         descricao: "Controle de versão e colaboração",
         status: "🔄 Pit Stop de código",
-        link: "#"
+        link: "./pages/git.html"
     },
     {
         nome: "JSON",
         icone: "🔗",
         descricao: "Formato leve de troca de dados",
         status: "📡 Telemetria da corrida",
-        link: "#"
+        link: "./pages/json.html"
     },
     {
         nome: "Terminal Linux",
@@ -89,21 +89,21 @@ const tecnologias = [
         icone: "🧠",
         descricao: "Pensamento computacional e algoritmos",
         status: "🏁 Estratégia de corrida",
-        link: "#"
+        link: "./pages/logica.html"
     },
     {
         nome: "Segurança da Informação",
         icone: "🔒",
         descricao: "Proteção de dados, criptografia e boas práticas",
         status: "🛡️ Escudo do piloto",
-        link: "#"
+        link: "./pages/seguranca.html"
     },
     {
         nome: "N8N",
         icone: "⚙️",
         descricao: "Automação de workflows e integrações",
         status: "🏎️ Pit Crew automatizado",
-        link: "#"
+        link: "./pages/n8n.html"
     }
 ];
 
