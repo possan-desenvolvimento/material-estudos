@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CSS | F1 Code - Hamilton's Garage</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/css.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@400;700;900&family=Titillium+Web:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Overlay escuro para a imagem de fundo -->
+    <div class="bg-overlay-css"></div>
+    
+    <header>
+        <div class="logo">
+            <h1>🏎️ F1 <span>CODE</span></h1>
+            <p class="tagline">"HAMILTON'S GARAGE — APRENDA A PROGRAMAR COMO UM CAMPEÃO"</p>
+        </div>
+        <div class="ferrari-badge">🏁 SF-25</div>
+    </header>
+
+    <div class="tutorial-container" id="tutorialContainer">
+        <a href="../../index.html" class="back-button">← VOLTAR PARA GRADE</a>
+        
+        <div class="tech-header">
+            <div class="icon">🎨</div>
+            <h1>CSS</h1>
+            <p>"Estilize sua aplicação como a pintura de uma Ferrari"</p>
+            <div class="header-flags">
+                <span>🎨</span>
+                <span>⚡</span>
+                <span>🎨</span>
+            </div>
+        </div>
+
+        <!-- Container de categorias (cards principais) -->
+        <div id="categoriesContainer" class="categories-grid"></div>
+        
+        <!-- Container de sub-cards (aparece ao clicar na categoria) -->
+        <div id="subCardsContainer" style="display: none;"></div>
+        
+        <!-- Container do conteúdo (aparece ao clicar no sub-card) -->
+        <div id="contentContainer" style="display: none;"></div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button id="backToCategories" class="back-button" style="display: none;">← VOLTAR PARA CATEGORIAS</button>
+            <button id="backToSubCards" class="back-button" style="display: none;">← VOLTAR PARA TÓPICOS</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>🏁 Pole Position — Seu conhecimento, sua vitória 🏁</p>
+        <p class="small">"In the end, it's not about the car, it's about the driver" — Lewis Hamilton</p>
+        <div class="footer-flags">
+            <span>🎨</span>
+            <span>🏆</span>
+            <span>🎨</span>
+        </div>
+    </footer>
+
+    <script src="../js/css.js"></script>
+</body>
+</html>
