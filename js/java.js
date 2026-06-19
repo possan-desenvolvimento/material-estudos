@@ -400,6 +400,51 @@ System.out.println("Fim da corrida!");`,
                     }
                 },
                 {
+                    id: "for-each",
+                    nome: "For-Each",
+                    icone: "🔄",
+                    descricao: "Loop simplificado para coleções",
+                    conteudo: {
+                        explicacao: "FOR-EACH é um loop SIMPLIFICADO para percorrer coleções e arrays. Muito mais fácil que FOR tradicional!",
+                        codigo: `// FOR-EACH - Sintaxe simples: for(tipo variavel : colecao)
+
+// EXEMPLO 1: Percorrer array
+String[] pilotos = {"Hamilton", "Leclerc", "Sainz"};
+for (String piloto : pilotos) {
+    System.out.println("🏎️ " + piloto);
+}
+
+// EXEMPLO 2: Percorrer ArrayList
+import java.util.ArrayList;
+
+ArrayList<Integer> numeros = new ArrayList<>();
+numeros.add(10);
+numeros.add(20);
+numeros.add(30);
+
+for (Integer numero : numeros) {
+    System.out.println("Número: " + numero);
+}
+
+// EXEMPLO 3: Percorrer com índice (precisa de tradicional)
+for (int i = 0; i < pilotos.length; i++) {
+    System.out.println(i + " → " + pilotos[i]);
+}
+
+// EXEMPLO 4: Percorrer HashMap
+import java.util.HashMap;
+
+HashMap<String, Integer> poderes = new HashMap<>();
+poderes.put("Hamilton", 95);
+poderes.put("Leclerc", 88);
+
+for (String chave : poderes.keySet()) {
+    System.out.println(chave + " → " + poderes.get(chave));
+}`,
+                        dica: "⚡ USE FOR-EACH quando: Não precisa de índice. É mais limpo e seguro que FOR tradicional!"
+                    }
+                },
+                {
                     id: "break-continue",
                     nome: "Break e Continue",
                     icone: "⏹️",
@@ -1377,6 +1422,1223 @@ pilotos.stream()
     .filter(p -> p.startsWith("H"))
     .forEach(p -> System.out.println("Filtrado: " + p));`,
                         dica: "🔥 Lambda torna o código mais conciso. Use com coleções e streams."
+                    }
+                }
+            ]
+        },
+        {
+            id: "interfaces",
+            nome: "INTERFACES JAVA",
+            icone: "🎭",
+            descricao: "Contrato, múltiplas heranças, abstração",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "criando-interfaces",
+                    nome: "Criando Interfaces",
+                    icone: "🎯",
+                    descricao: "Definindo contratos e métodos abstratos",
+                    conteudo: {
+                        explicacao: "Interface é um CONTRATO que define o QUE uma classe deve fazer, mas NÃO COMO fazer. Todas as classes que implementam a interface DEVEM ter aqueles métodos.",
+                        codigo: `// DEFININDO INTERFACE
+public interface Veiculo {
+    // Métodos abstratos (sem corpo)
+    void acelerar();
+    void frear();
+    int getVelocidade();
+}
+
+// CLASSE implementando INTERFACE
+public class Carro implements Veiculo {
+    private int velocidade = 0;
+    
+    @Override
+    public void acelerar() {
+        velocidade += 20;
+        System.out.println("🏎️ Carro acelerou! Velocidade: " + velocidade);
+    }
+    
+    @Override
+    public void frear() {
+        velocidade -= 10;
+        System.out.println("🛑 Carro freou! Velocidade: " + velocidade);
+    }
+    
+    @Override
+    public int getVelocidade() {
+        return velocidade;
+    }
+}
+
+// USANDO
+public class Main {
+    public static void main(String[] args) {
+        Veiculo carro = new Carro();
+        carro.acelerar();  // "🏎️ Carro acelerou!"
+        System.out.println(carro.getVelocidade());  // 20
+    }
+}`,
+                        dica: "🔥 Interface = contrato. Classe implementa = segue o contrato. Use 'implements'."
+                    }
+                },
+                {
+                    id: "interface-multipla",
+                    nome: "Múltiplas Interfaces",
+                    icone: "🔗",
+                    descricao: "Uma classe implementando várias interfaces",
+                    conteudo: {
+                        explicacao: "Uma classe pode implementar MÚLTIPLAS interfaces. Isso permite ter 'múltiplas heranças' de comportamento.",
+                        codigo: `// INTERFACE 1
+public interface Acelerador {
+    void acelerar();
+}
+
+// INTERFACE 2
+public interface Freador {
+    void frear();
+}
+
+// CLASSE implementando DUAS interfaces
+public class Carro implements Acelerador, Freador {
+    @Override
+    public void acelerar() {
+        System.out.println("Acelerou! 🏎️");
+    }
+    
+    @Override
+    public void frear() {
+        System.out.println("Freou! 🛑");
+    }
+}
+
+// USANDO
+Carro carro = new Carro();
+carro.acelerar();
+carro.frear();
+
+// POLIMORFISMO com interfaces
+Acelerador a = new Carro();
+Freador f = new Carro();
+a.acelerar();
+f.frear();`,
+                        dica: "⚡ Múltiplas interfaces = flexibilidade total. Uma classe pode ter vários 'comportamentos'."
+                    }
+                },
+                {
+                    id: "interface-default",
+                    nome: "Métodos Default",
+                    icone: "⚙️",
+                    descricao: "Implementação padrão em interfaces (Java 8+)",
+                    conteudo: {
+                        explicacao: "Java 8+ permite adicionar implementação PADRÃO em métodos de interface com 'default'.",
+                        codigo: `// INTERFACE com método DEFAULT
+public interface Veiculo {
+    void acelerar();
+    
+    // Método DEFAULT com implementação
+    default void ligar() {
+        System.out.println("🔧 Veículo ligado!");
+    }
+    
+    // Método static
+    static void info() {
+        System.out.println("Interface Veiculo v1.0");
+    }
+}
+
+// CLASSE pode NÃO implementar método default
+public class Carro implements Veiculo {
+    @Override
+    public void acelerar() {
+        System.out.println("Carro acelerou!");
+    }
+    // NÃO precisa implementar ligar() - usa default
+}
+
+// USANDO
+Carro carro = new Carro();
+carro.ligar();       // Usa implementação default
+carro.acelerar();    // Implementação própria
+Veiculo.info();      // Chama método static`,
+                        dica: "💡 Use 'default' para fornecer implementação padrão sem quebrar classes antigas."
+                    }
+                }
+            ]
+        },
+        {
+            id: "enums",
+            nome: "ENUMS JAVA",
+            icone: "📊",
+            descricao: "Tipos enumerados e constantes nomeadas",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "criando-enum",
+                    nome: "Criando Enums",
+                    icone: "🏷️",
+                    descricao: "Definindo valores fixos e nomeados",
+                    conteudo: {
+                        explicacao: "Enum permite definir um conjunto FIXO de constantes nomeadas. Perfeito para valores que nunca mudam (dias, meses, cores, status).",
+                        codigo: `// DEFININDO ENUM
+public enum DiaSemana {
+    SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO, DOMINGO
+}
+
+// USANDO ENUM
+public class Main {
+    public static void main(String[] args) {
+        DiaSemana hoje = DiaSemana.TERCA;
+        
+        System.out.println(hoje);  // TERCA
+        System.out.println(hoje.ordinal());  // 1 (índice)
+        System.out.println(hoje.name());     // "TERCA"
+    }
+}
+
+// ENUM em Switch
+DiaSemana dia = DiaSemana.SEXTA;
+switch (dia) {
+    case SEGUNDA:
+    case TERCA:
+    case QUARTA:
+    case QUINTA:
+        System.out.println("Dia de trabalho 💼");
+        break;
+    case SEXTA:
+        System.out.println("Quase lá! 🎉");
+        break;
+    case SABADO:
+    case DOMINGO:
+        System.out.println("Fim de semana! 🏖️");
+        break;
+}
+
+// ITERANDO ENUM
+for (DiaSemana dia : DiaSemana.values()) {
+    System.out.println(dia);
+}`,
+                        dica: "🔥 Enum = segurança de tipos. Use para valores que não mudam (status, categoria, etc)."
+                    }
+                },
+                {
+                    id: "enum-avancado",
+                    nome: "Enums Avançados",
+                    icone: "⚙️",
+                    descricao: "Enums com atributos e métodos",
+                    conteudo: {
+                        explicacao: "Enums podem ter atributos, construtores e métodos próprios.",
+                        codigo: `// ENUM com atributos
+public enum Piloto {
+    HAMILTON("Lewis Hamilton", 44, "Mercedes"),
+    LECLERC("Charles Leclerc", 16, "Ferrari"),
+    SAINZ("Carlos Sainz", 55, "Ferrari"),
+    VERSTAPPEN("Max Verstappen", 1, "Red Bull");
+    
+    private final String nome;
+    private final int numero;
+    private final String equipe;
+    
+    // Construtor (é PRIVATE)
+    Piloto(String nome, int numero, String equipe) {
+        this.nome = nome;
+        this.numero = numero;
+        this.equipe = equipe;
+    }
+    
+    // Getters
+    public String getNome() { return nome; }
+    public int getNumero() { return numero; }
+    public String getEquipe() { return equipe; }
+    
+    // Método
+    public void info() {
+        System.out.println(nome + " #" + numero + " (" + equipe + ")");
+    }
+}
+
+// USANDO
+Piloto p = Piloto.HAMILTON;
+p.info();  // "Lewis Hamilton #44 (Mercedes)"
+System.out.println(p.getNome());  // "Lewis Hamilton"`,
+                        dica: "⚡ Enums avançados = dados + comportamento. Muito poderoso para modelar domínios!"
+                    }
+                }
+            ]
+        },
+        {
+            id: "anotacoes",
+            nome: "ANOTAÇÕES JAVA",
+            icone: "📌",
+            descricao: "@Override, @Deprecated, @FunctionalInterface",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "anotacoes-comuns",
+                    nome: "Anotações Comuns",
+                    icone: "🏷️",
+                    descricao: "@Override, @Deprecated, @SuppressWarnings",
+                    conteudo: {
+                        explicacao: "Anotações fornecem informações sobre o código mas NÃO afetam sua execução. Começam com @.",
+                        codigo: `// @Override - Indica que método sobrescreve um da classe pai
+public class Piloto {
+    public void acelerar() {
+        System.out.println("Acelerou!");
+    }
+}
+
+public class PilotoF1 extends Piloto {
+    @Override
+    public void acelerar() {
+        System.out.println("🏎️ Acelerou na F1!");
+    }
+}
+
+// @Deprecated - Marca método como obsoleto
+public class Utils {
+    @Deprecated  // Não use mais!
+    public void metodAntigoAntigoigo() {
+        System.out.println("Método antigo");
+    }
+    
+    public void metodoNovo() {
+        System.out.println("Método novo");
+    }
+}
+
+// @SuppressWarnings - Ignora avisos do compilador
+@SuppressWarnings("unchecked")
+public void metodoComAviso() {
+    // Compilador não reclama
+}
+
+// @FunctionalInterface - Marca interface com UM método
+@FunctionalInterface
+public interface Operacao {
+    int calcular(int a, int b);
+}
+
+// Usando com Lambda
+Operacao soma = (a, b) -> a + b;
+System.out.println(soma.calcular(5, 3));  // 8`,
+                        dica: "💡 @Override previne erros. @Deprecated avisa que algo não usar mais. @FunctionalInterface garante apenas 1 método."
+                    }
+                },
+                {
+                    id: "anotacoes-custom",
+                    nome: "Anotações Personalizadas",
+                    icone: "✨",
+                    descricao: "Criando suas próprias anotações",
+                    conteudo: {
+                        explicacao: "Você pode criar suas próprias anotações para marcar e documentar código.",
+                        codigo: `// CRIANDO ANOTAÇÃO
+import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)  // Usa em métodos
+@Retention(RetentionPolicy.RUNTIME)  // Mantém em tempo de execução
+public @interface Teste {
+    String valor() default "teste";
+    int prioridade() default 1;
+}
+
+// USANDO ANOTAÇÃO
+public class MinhaClasse {
+    @Teste
+    public void testeSimpel() {
+        System.out.println("Teste simples");
+    }
+    
+    @Teste(valor = "teste importante", prioridade = 5)
+    public void testeImportante() {
+        System.out.println("Teste importante");
+    }
+}
+
+// LENDO ANOTAÇÃO em tempo de execução
+import java.lang.reflect.*;
+
+Class<?> classe = MinhaClasse.class;
+for (Method metodo : classe.getDeclaredMethods()) {
+    if (metodo.isAnnotationPresent(Teste.class)) {
+        Teste anotacao = metodo.getAnnotation(Teste.class);
+        System.out.println("Teste: " + anotacao.valor());
+        System.out.println("Prioridade: " + anotacao.prioridade());
+    }
+}`,
+                        dica: "🔥 Anotações personalizadas = meta-programação. Muito usado em frameworks (Spring, Hibernate)."
+                    }
+                }
+            ]
+        },
+        {
+            id: "regex",
+            nome: "REGEX (EXPRESSÕES REGULARES)",
+            icone: "🔍",
+            descricao: "Padrões de busca e validação de texto",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "regex-basico",
+                    nome: "Regex Básico",
+                    icone: "📝",
+                    descricao: "Padrões simples de busca",
+                    conteudo: {
+                        explicacao: "Regex é um padrão para buscar, validar e manipular texto. Muito poderoso!",
+                        codigo: `// PADRÕES SIMPLES
+String texto = "Hamilton é piloto da F1";
+
+// MATCHES - Texto inteiro corresponde?
+boolean teste1 = texto.matches(".*Hamilton.*");  // true
+
+// CONTAINS - Contém substring?
+boolean teste2 = texto.contains("piloto");  // true
+
+// REPLACE com Regex
+String resultado = texto.replaceAll("[0-9]", "X");  // Remove números
+
+// PADRÕES COMUNS
+// . = qualquer caractere
+// * = 0 ou mais
+// + = 1 ou mais
+// ? = 0 ou 1
+// [abc] = a, b ou c
+// [0-9] = dígito
+// \\d = dígito
+// \\w = letra/dígito/_
+// \\s = espaço
+
+// EXEMPLOS
+boolean email = "teste@gmail.com".matches("[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+");  // true
+boolean telefone = "1199999999".matches("[0-9]{10}");  // true
+boolean cep = "01234567".matches("[0-9]{5}[-]?[0-9]{3}");  // true`,
+                        dica: "💡 Regex é complexo. Use sites como regex101.com para testar. Decore os padrões mais usados."
+                    }
+                },
+                {
+                    id: "regex-pattern",
+                    nome: "Pattern e Matcher",
+                    icone: "🎯",
+                    descricao: "Busca avançada com Pattern/Matcher",
+                    conteudo: {
+                        explicacao: "Para regex mais complexas, use Pattern e Matcher para encontrar todas as ocorrências.",
+                        codigo: `import java.util.regex.*;
+
+// PATTERN e MATCHER
+String texto = "Telefone: 1199999999, WhatsApp: 1188888888";
+String regex = "\\d{10}";
+
+Pattern pattern = Pattern.compile(regex);
+Matcher matcher = pattern.matcher(texto);
+
+// ENCONTRAR TODAS as ocorrências
+while (matcher.find()) {
+    System.out.println("Encontrado: " + matcher.group());  // Imprime todos os números
+}
+
+// VALIDAR EMAIL
+String email = "lewis@f1.com";
+String padraoEmail = "[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+";
+if (email.matches(padraoEmail)) {
+    System.out.println("Email válido!");
+}
+
+// EXTRAÇÃO com grupos
+String url = "https://www.google.com/search?q=java";
+Pattern p = Pattern.compile("(https?://)?([a-z.]+)\\.[a-z]+(/.*)?" );
+Matcher m = p.matcher(url);
+
+if (m.matches()) {
+    System.out.println("Domínio: " + m.group(2));  // "google"
+}
+
+// SPLIT com Regex
+String csv = "Hamilton, Leclerc, Sainz";
+String[] pilotos = csv.split(", ");  // Divide por ", "
+for (String piloto : pilotos) {
+    System.out.println(piloto);
+}`,
+                        dica: "⚡ Pattern.compile() uma vez e reutilize. Mais rápido que chamar matches() múltiplas vezes."
+                    }
+                }
+            ]
+        },
+        {
+            id: "json",
+            nome: "JSON EM JAVA",
+            icone: "📦",
+            descricao: "Manipulação de JSON (Gson, Jackson)",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "json-basico",
+                    nome: "JSON Básico",
+                    icone: "📄",
+                    descricao: "Estrutura e formato JSON",
+                    conteudo: {
+                        explicacao: "JSON é um formato de dados leve. Muito usado em APIs e comunicação web.",
+                        codigo: `// JSON é texto estruturado
+String jsonPiloto = "{"
+    + "\"nome\": \"Lewis Hamilton\","
+    + "\"numero\": 44,"
+    + "\"equipe\": \"Ferrari\","
+    + "\"ativo\": true"
+    + "}";  // String contendo JSON
+
+// ESTRUTURA JSON
+/*
+{
+  "nome": "Lewis Hamilton",
+  "numero": 44,
+  "vitoria": true,
+  "tempos": [1.25, 1.26, 1.24],
+  "historico": {
+    "ano": 2024,
+    "pais": "Italia"
+  }
+}
+*/
+
+// Tipos em JSON
+// String: "texto"
+// Número: 123, 45.67
+// Boolean: true, false
+// Array: [1, 2, 3]
+// Objeto: {...}
+// Null: null`,
+                        dica: "💡 JSON = JavaScript Object Notation. Legível, leve, usado em toda web."
+                    }
+                },
+                {
+                    id: "json-gson",
+                    nome: "Gson (Google)",
+                    icone: "🔧",
+                    descricao: "Serialização/desserialização com Gson",
+                    conteudo: {
+                        explicacao: "Gson converte entre Java Object e JSON automaticamente.",
+                        codigo: `// ADICIONAR DEPENDÊNCIA (Maven)
+/*
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.10.1</version>
+</dependency>
+*/
+
+import com.google.gson.*;
+
+public class Piloto {
+    String nome;
+    int numero;
+    String equipe;
+    
+    public Piloto(String nome, int numero, String equipe) {
+        this.nome = nome;
+        this.numero = numero;
+        this.equipe = equipe;
+    }
+}
+
+// CONVERTER OBJETO para JSON
+Gson gson = new Gson();
+Piloto hamilton = new Piloto("Lewis Hamilton", 44, "Ferrari");
+String json = gson.toJson(hamilton);
+System.out.println(json);
+// {"nome":"Lewis Hamilton","numero":44,"equipe":"Ferrari"}
+
+// CONVERTER JSON para OBJETO
+String jsonString = \"{\\"nome\\":\\"Charles Leclerc\\",\\"numero\\":16,\\"equipe\\":\\"Ferrari\\"}\";
+Piloto piloto = gson.fromJson(jsonString, Piloto.class);
+System.out.println(piloto.nome);  // "Charles Leclerc"
+
+// CONVERTER LISTA de Objetos
+ArrayList<Piloto> pilotos = new ArrayList<>();
+pilotos.add(hamilton);
+pilotos.add(new Piloto("Charles Leclerc", 16, "Ferrari"));
+
+String jsonList = gson.toJson(pilotos);
+System.out.println(jsonList);  // [{...}, {...}]`,
+                        dica: "🔥 Gson é o mais simples. Precisa de getters/setters ou construtor vazio."
+                    }
+                },
+                {
+                    id: "json-jackson",
+                    nome: "Jackson",
+                    icone: "🔧",
+                    descricao: "Alternativa com mais recursos",
+                    conteudo: {
+                        explicacao: "Jackson é mais poderoso e rápido, usado em frameworks como Spring.",
+                        codigo: `// ADICIONAR DEPENDÊNCIA (Maven)
+/*
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.15.2</version>
+</dependency>
+*/
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Piloto {
+    public String nome;
+    public int numero;
+    public String equipe;
+}
+
+// CONVERTER OBJETO para JSON
+ObjectMapper mapper = new ObjectMapper();
+Piloto hamilton = new Piloto();
+hamilton.nome = "Lewis Hamilton";
+hamilton.numero = 44;
+hamilton.equipe = "Ferrari";
+
+String json = mapper.writeValueAsString(hamilton);
+System.out.println(json);
+
+// CONVERTER JSON para OBJETO
+String jsonString = "{\\"nome\\":\\"Charles\\",\\"numero\\":16,\\"equipe\\":\\"Ferrari\\"}";
+Piloto piloto = mapper.readValue(jsonString, Piloto.class);
+System.out.println(piloto.nome);
+
+// CONVERTER para OBJETO GENÉRICO (sem classe específica)
+Map<String, Object> dados = mapper.readValue(jsonString, Map.class);
+System.out.println(dados.get("nome"));`,
+                        dica: "⚡ Jackson é padrão em Spring Boot. Mais rápido e flexível que Gson."
+                    }
+                }
+            ]
+        },
+        {
+            id: "streams",
+            nome: "STREAMS API",
+            icone: "🌊",
+            descricao: "Processamento funcional de coleções",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "streams-basico",
+                    nome: "Streams Básico",
+                    icone: "🔄",
+                    descricao: "filter, map, forEach",
+                    conteudo: {
+                        explicacao: "Streams permite processar coleções de forma funcional e elegante.",
+                        codigo: `import java.util.*;
+import java.util.stream.*;
+
+ArrayList<Integer> numeros = new ArrayList<>();
+numeros.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+// FILTRAR (filter)
+List<Integer> pares = numeros.stream()
+    .filter(n -> n % 2 == 0)  // Só números pares
+    .collect(Collectors.toList());
+// [2, 4, 6, 8, 10]
+
+// TRANSFORMAR (map)
+List<Integer> dobrados = numeros.stream()
+    .map(n -> n * 2)  // Multiplica cada um por 2
+    .collect(Collectors.toList());
+// [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+// PERCORRER (forEach)
+numeros.stream()
+    .filter(n -> n > 5)
+    .forEach(n -> System.out.println(n));  // 6, 7, 8, 9, 10
+
+// ENCADEAR operações
+List<Integer> resultado = numeros.stream()
+    .filter(n -> n > 3)              // Maior que 3
+    .map(n -> n * n)                 // Eleva ao quadrado
+    .collect(Collectors.toList());
+// [16, 25, 36, 49, 64, 81, 100]`,
+                        dica: "💡 Streams = operações encadeadas. filter(), map(), forEach() são os mais usados."
+                    }
+                },
+                {
+                    id: "streams-avancado",
+                    nome: "Streams Avançado",
+                    icone: "🚀",
+                    descricao: "reduce, collect, distinct, sorted",
+                    conteudo: {
+                        explicacao: "Operações mais avançadas de streams para processamento complexo.",
+                        codigo: `import java.util.stream.*;
+import java.util.*;
+
+List<Integer> numeros = Arrays.asList(1, 2, 2, 3, 4, 4, 5, 5, 5);
+
+// REMOVER DUPLICATAS (distinct)
+List<Integer> unicos = numeros.stream()
+    .distinct()
+    .collect(Collectors.toList());
+// [1, 2, 3, 4, 5]
+
+// ORDENAR (sorted)
+List<Integer> ordenado = numeros.stream()
+    .sorted()
+    .collect(Collectors.toList());
+// [1, 2, 2, 3, 4, 4, 5, 5, 5]
+
+// ORDENAR ao contrário
+List<Integer> descendente = numeros.stream()
+    .sorted(Collections.reverseOrder())
+    .collect(Collectors.toList());
+
+// REDUZIR (reduce)
+int soma = numeros.stream()
+    .reduce(0, (a, b) -> a + b);  // Soma tudo: 31
+
+int produto = numeros.stream()
+    .reduce(1, (a, b) -> a * b);  // Multiplica tudo
+
+// CONTAR
+long quantidade = numeros.stream()
+    .count();  // 9
+
+// AGRUPAR (groupingBy)
+Map<Integer, Long> agrupado = numeros.stream()
+    .collect(Collectors.groupingBy(
+        n -> n,  // Chave
+        Collectors.counting()  // Valor (quantidade)
+    ));
+// {1=1, 2=2, 3=1, 4=2, 5=3}
+
+// TRANSFORMAR PARA MAP
+List<String> nomes = Arrays.asList("Hamilton", "Leclerc", "Sainz");
+Map<String, Integer> mapa = nomes.stream()
+    .collect(Collectors.toMap(
+        n -> n,        // Chave
+        n -> n.length() // Valor
+    ));
+// {Hamilton=8, Leclerc=8, Sainz=5}`,
+                        dica: "⚡ Streams = funcional e poderoso. reduce() é como fazer um for com acumulador."
+                    }
+                },
+                {
+                    id: "streams-com-objetos",
+                    nome: "Streams com Objetos",
+                    icone: "🎯",
+                    descricao: "Filtrando, mapeando e coletando objetos",
+                    conteudo: {
+                        explicacao: "Streams brilham quando trabalham com listas de objetos complexos.",
+                        codigo: `import java.util.stream.*;
+import java.util.*;
+
+public class Piloto {
+    String nome;
+    int numero;
+    int vitoria;
+    
+    public Piloto(String nome, int numero, int vitoria) {
+        this.nome = nome;
+        this.numero = numero;
+        this.vitoria = vitoria;
+    }
+}
+
+List<Piloto> pilotos = Arrays.asList(
+    new Piloto("Hamilton", 44, 103),
+    new Piloto("Leclerc", 16, 5),
+    new Piloto("Sainz", 55, 5),
+    new Piloto("Verstappen", 1, 60)
+);
+
+// FILTRAR pilotos com mais de 10 vitórias
+List<Piloto> vencedores = pilotos.stream()
+    .filter(p -> p.vitoria > 10)
+    .collect(Collectors.toList());
+
+// MAPEAR para nomes
+List<String> nomes = pilotos.stream()
+    .map(p -> p.nome)
+    .collect(Collectors.toList());
+// ["Hamilton", "Leclerc", "Sainz", "Verstappen"]
+
+// ORDENAR por vitórias (descendente)
+List<Piloto> ranking = pilotos.stream()
+    .sorted((p1, p2) -> p2.vitoria - p1.vitoria)
+    .collect(Collectors.toList());
+
+// ENCONTRAR PRIMEIRO
+Optional<Piloto> melhor = pilotos.stream()
+    .max(Comparator.comparingInt(p -> p.vitoria));
+if (melhor.isPresent()) {
+    System.out.println("Melhor: " + melhor.get().nome);
+}
+
+// CALCULAR TOTAL DE VITÓRIAS
+int totalVitorias = pilotos.stream()
+    .mapToInt(p -> p.vitoria)
+    .sum();
+// 173`,
+                        dica: "🔥 Use .mapToInt(), .mapToDouble() para operações matemáticas em atributos."
+                    }
+                }
+            ]
+        },
+        {
+            id: "banco-dados",
+            nome: "BANCO DE DADOS",
+            icone: "💾",
+            descricao: "JDBC, SQL e conexão com BD",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "jdbc-basico",
+                    nome: "JDBC Básico",
+                    icone: "🔗",
+                    descricao: "Conectar e executar comandos SQL",
+                    conteudo: {
+                        explicacao: "JDBC é a API para conectar Java com bancos de dados (MySQL, PostgreSQL, Oracle, etc).",
+                        codigo: `import java.sql.*;
+
+public class ConexaoBD {
+    public static void main(String[] args) {
+        // CONEXÃO
+        String url = "jdbc:mysql://localhost:3306/f1";
+        String usuario = "root";
+        String senha = "123456";
+        
+        try (Connection conn = DriverManager.getConnection(url, usuario, senha)) {
+            System.out.println("✅ Conectado ao banco!");
+            
+            // SELECT
+            String sql = "SELECT * FROM pilotos WHERE numero = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, 44);  // numero = 44
+                
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        String nome = rs.getString("nome");
+                        int numero = rs.getInt("numero");
+                        System.out.println(nome + " #" + numero);
+                    }
+                }
+            }
+            
+            // INSERT
+            String insertSQL = "INSERT INTO pilotos (nome, numero, equipe) VALUES (?, ?, ?)";
+            try (PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
+                stmt.setString(1, "Charles Leclerc");
+                stmt.setInt(2, 16);
+                stmt.setString(3, "Ferrari");
+                stmt.executeUpdate();  // Executa INSERT
+                System.out.println("✅ Piloto inserido!");
+            }
+            
+            // UPDATE
+            String updateSQL = "UPDATE pilotos SET equipe = ? WHERE numero = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(updateSQL)) {
+                stmt.setString(1, "Mercedes");
+                stmt.setInt(2, 44);
+                stmt.executeUpdate();
+                System.out.println("✅ Piloto atualizado!");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("❌ Erro: " + e.getMessage());
+        }
+    }
+}`,
+                        dica: "💡 SEMPRE use PreparedStatement (com ?) para evitar SQL Injection. Nunca concatene strings!"
+                    }
+                },
+                {
+                    id: "jdbc-avancado",
+                    nome: "JDBC Avançado",
+                    icone: "🚀",
+                    descricao: "Connection Pool, transações, metadata",
+                    conteudo: {
+                        explicacao: "Padrões avançados para usar JDBC de forma eficiente em produção.",
+                        codigo: `import java.sql.*;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+// CONNECTION POOL (HikariCP é o melhor)
+public class DBConexao {
+    private static HikariDataSource dataSource;
+    
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/f1");
+        config.setUsername("root");
+        config.setPassword("123456");
+        config.setMaximumPoolSize(10);  // Máximo de conexões
+        dataSource = new HikariDataSource(config);
+    }
+    
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+}
+
+// TRANSAÇÃO (tudo ou nada)
+public class TransacaoBD {
+    public void transferencia(int deID, int paraID, double valor) throws SQLException {
+        Connection conn = DBConexao.getConnection();
+        try {
+            conn.setAutoCommit(false);  // Desativa autocommit
+            
+            // Debita
+            executarSQL(conn, "UPDATE contas SET saldo = saldo - ? WHERE id = ?", valor, deID);
+            
+            // Credita
+            executarSQL(conn, "UPDATE contas SET saldo = saldo + ? WHERE id = ?", valor, paraID);
+            
+            conn.commit();  // Confirma tudo
+            System.out.println("✅ Transação concluída!");
+        } catch (Exception e) {
+            conn.rollback();  // Desfaz tudo
+            System.out.println("❌ Transação falhou: " + e.getMessage());
+        }
+    }
+    
+    private void executarSQL(Connection conn, String sql, double valor, int id) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, valor);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        }
+    }
+}
+
+// METADATA (informações sobre banco)
+public class MetadadosBD {
+    public static void main(String[] args) throws SQLException {
+        try (Connection conn = DBConexao.getConnection()) {
+            DatabaseMetaData meta = conn.getMetaData();
+            System.out.println("BD: " + meta.getDatabaseProductName());
+            System.out.println("Versão: " + meta.getDatabaseProductVersion());
+            
+            // Listar tabelas
+            ResultSet tabelas = meta.getTables(null, null, "%", new String[]{"TABLE"});
+            while (tabelas.next()) {
+                System.out.println("Tabela: " + tabelas.getString("TABLE_NAME"));
+            }
+        }
+    }
+}`,
+                        dica: "⚡ Use Connection Pool (HikariCP) em produção. Transações evitam inconsistências."
+                    }
+                }
+            ]
+        },
+        {
+            id: "mensageria",
+            nome: "MENSAGERIA & MESSAGE BROKERS",
+            icone: "📨",
+            descricao: "JMS, RabbitMQ, Kafka, ActiveMQ",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "jms-basico",
+                    nome: "JMS (Java Message Service)",
+                    icone: "📤",
+                    descricao: "Padrão Java de mensageria",
+                    conteudo: {
+                        explicacao: "JMS é o padrão Java para aplicações enviarem mensagens umas às outras (assincronamente).",
+                        codigo: `import javax.jms.*;
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+// PRODUTOR (envia mensagem)
+public class Produtor {
+    public static void main(String[] args) throws Exception {
+        // Configurar conexão
+        ConnectionFactory factory = new ActiveMQConnectionFactory(
+            "tcp://localhost:61616"  // Servidor de mensagens (ActiveMQ)
+        );
+        
+        try (Connection connection = factory.createConnection()) {
+            connection.start();
+            
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Queue queue = session.createQueue("f1-pilotos");
+            MessageProducer producer = session.createProducer(queue);
+            
+            // Enviar mensagem
+            String mensagem = "Hamilton venceu a corrida!";
+            TextMessage msg = session.createTextMessage(mensagem);
+            producer.send(msg);
+            
+            System.out.println("✅ Mensagem enviada: " + mensagem);
+            
+            session.close();
+        }
+    }
+}
+
+// CONSUMIDOR (recebe mensagem)
+public class Consumidor {
+    public static void main(String[] args) throws Exception {
+        ConnectionFactory factory = new ActiveMQConnectionFactory(
+            "tcp://localhost:61616"
+        );
+        
+        try (Connection connection = factory.createConnection()) {
+            connection.start();
+            
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Queue queue = session.createQueue("f1-pilotos");
+            MessageConsumer consumer = session.createConsumer(queue);
+            
+            System.out.println("🎧 Aguardando mensagens...");
+            
+            // Ouve mensagens
+            Message message = consumer.receive();  // Bloqueia até receber
+            
+            if (message instanceof TextMessage) {
+                String texto = ((TextMessage) message).getText();
+                System.out.println("📨 Mensagem recebida: " + texto);
+            }
+            
+            session.close();
+        }
+    }
+}`,
+                        dica: "💡 JMS = padrão. Produtor envia, consumidor recebe. Assincronamente!"
+                    }
+                },
+                {
+                    id: "rabbitmq",
+                    nome: "RabbitMQ",
+                    icone: "🐰",
+                    descricao: "Message broker popular e confiável",
+                    conteudo: {
+                        explicacao: "RabbitMQ é um message broker de código aberto, robusto e confiável.",
+                        codigo: `// ADICIONAR DEPENDÊNCIA (Maven)
+/*
+<dependency>
+    <groupId>com.rabbitmq</groupId>
+    <artifactId>amqp-client</artifactId>
+    <version>5.16.0</version>
+</dependency>
+*/
+
+import com.rabbitmq.client.*;
+
+// PRODUTOR
+public class ProdutorRabbit {
+    public static void main(String[] args) throws Exception {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        factory.setPort(5672);
+        
+        try (Connection connection = factory.newConnection(); 
+             Channel channel = connection.createChannel()) {
+            
+            String exchange = "f1-events";
+            String routingKey = "corrida.resultado";
+            
+            // Declarar exchange e queue
+            channel.exchangeDeclare(exchange, "topic", true);
+            String queueName = channel.queueDeclare().getQueue();
+            channel.queueBind(queueName, exchange, routingKey);
+            
+            // Enviar mensagem
+            String mensagem = "Hamilton venceu a corrida!";
+            channel.basicPublish(exchange, routingKey, null, mensagem.getBytes());
+            
+            System.out.println("✅ Mensagem publicada no RabbitMQ!");
+        }
+    }
+}
+
+// CONSUMIDOR
+public class ConsumidorRabbit {
+    public static void main(String[] args) throws Exception {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        
+        Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel();
+        
+        String exchange = "f1-events";
+        String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, exchange, "corrida.*");
+        
+        System.out.println("🎧 Escutando mensagens...");
+        
+        // Callback quando chega mensagem
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+            String mensagem = new String(delivery.getBody(), "UTF-8");
+            System.out.println("📨 Recebido: " + mensagem);
+        };
+        
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {});
+    }
+}`,
+                        dica: "🔥 RabbitMQ = confiável. Garante entrega e suporta padrões avançados."
+                    }
+                },
+                {
+                    id: "kafka",
+                    nome: "Apache Kafka",
+                    icone: "⚡",
+                    descricao: "Stream de dados em tempo real",
+                    conteudo: {
+                        explicacao: "Kafka é para processamento em tempo real de streams de dados. Escala enorme!",
+                        codigo: `// ADICIONAR DEPENDÊNCIA (Maven)
+/*
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-clients</artifactId>
+    <version>3.5.0</version>
+</dependency>
+*/
+
+import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.clients.consumer.*;
+import java.util.Properties;
+import java.util.Collections;
+
+// PRODUTOR
+public class ProdutorKafka {
+    public static void main(String[] args) throws Exception {
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:9092");
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        
+        try (Producer<String, String> producer = new KafkaProducer<>(props)) {
+            // Enviar mensagem
+            ProducerRecord<String, String> record = 
+                new ProducerRecord<>("f1-resultados", "Hamilton", "Vencedor da corrida!");
+            
+            producer.send(record, (metadata, exception) -> {
+                if (exception != null) {
+                    System.out.println("❌ Erro: " + exception.getMessage());
+                } else {
+                    System.out.println("✅ Mensagem enviada ao tópico: " + metadata.topic());
+                }
+            });
+        }
+    }
+}
+
+// CONSUMIDOR
+public class ConsumidorKafka {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:9092");
+        props.put("group.id", "f1-group");
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        
+        try (Consumer<String, String> consumer = new KafkaConsumer<>(props)) {
+            consumer.subscribe(Collections.singletonList("f1-resultados"));
+            
+            System.out.println("🎧 Consumindo mensagens do Kafka...");
+            
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(java.time.Duration.ofMillis(100));
+                records.forEach(record -> {
+                    System.out.println("📨 " + record.key() + ": " + record.value());
+                });
+            }
+        }
+    }
+}`,
+                        dica: "⚡ Kafka = big data. Processa MILHÕES de mensagens por segundo. Scale horizontal."
+                    }
+                }
+            ]
+        },
+        {
+            id: "optional",
+            nome: "OPTIONAL (Java 8+)",
+            icone: "📦",
+            descricao: "Alternativa segura a null",
+            progresso: 0,
+            subCards: [
+                {
+                    id: "optional-basico",
+                    nome: "Optional Básico",
+                    icone: "🎁",
+                    descricao: "Eliminando NullPointerException",
+                    conteudo: {
+                        explicacao: "Optional é um container que pode conter um valor ou estar vazio. Elimina NullPointerException!",
+                        codigo: `import java.util.Optional;
+
+// PROBLEMA: null pode causar NullPointerException
+String nome = null;
+if (nome != null) {
+    System.out.println(nome.length());  // Precisa verificar
+}
+
+// SOLUÇÃO: usar Optional
+Optional<String> optionalNome = Optional.of("Hamilton");
+
+// VERIFICAR se tem valor
+if (optionalNome.isPresent()) {
+    System.out.println(optionalNome.get());  // "Hamilton"
+}
+
+// USAR ifPresent
+optionalNome.ifPresent(n -> System.out.println("Nome: " + n));
+
+// USAR ifPresentOrElse (Java 9+)
+optionalNome.ifPresentOrElse(
+    n -> System.out.println("Nome: " + n),
+    () -> System.out.println("Sem nome")
+);
+
+// USAR orElse (valor padrão)
+String nome2 = optionalNome.orElse("Desconhecido");
+
+// USAR orElseThrow
+String nome3 = optionalNome.orElseThrow(() -> new RuntimeException("Nome não fornecido"));
+
+// CRIAR Optional VAZIO
+Optional<String> vazio = Optional.empty();
+System.out.println(vazio.isPresent());  // false`,
+                        dica: "💡 Optional = sem null. Use para evitar NullPointerException e código mais limpo."
+                    }
+                },
+                {
+                    id: "optional-avancado",
+                    nome: "Optional Avançado",
+                    icone: "🚀",
+                    descricao: "map, filter, flatMap",
+                    conteudo: {
+                        explicacao: "Optional funciona como stream com map, filter e flatMap para transformações.",
+                        codigo: `import java.util.Optional;
+
+public class Piloto {
+    public String nome;
+    public Optional<String> apelido;
+    
+    public Piloto(String nome, String apelido) {
+        this.nome = nome;
+        this.apelido = Optional.ofNullable(apelido);  // Pode ser null
+    }
+}
+
+// MAP - Transformar valor
+Optional<Piloto> optionalPiloto = Optional.of(new Piloto("Hamilton", "Sir Lewis"));
+
+Optional<String> apelido = optionalPiloto
+    .map(p -> p.apelido)   // Pega o Optional<String> do piloto
+    .orElse(Optional.empty());  // Se vazio, retorna Optional vazio
+
+// Ou mais simples:
+Optional<String> apelido2 = optionalPiloto
+    .flatMap(p -> p.apelido);  // flatMap desembrulha o Optional
+
+apelido2.ifPresent(a -> System.out.println("Apelido: " + a));
+
+// FILTER - Filtrar valores
+Optional<Piloto> hamiltonVencedor = optionalPiloto
+    .filter(p -> p.nome.contains("Hamilton"));
+
+if (hamiltonVencedor.isPresent()) {
+    System.out.println("✅ Hamilton encontrado!");
+}
+
+// CHAIN de operações
+Optional<Integer> tamanho = optionalPiloto
+    .map(p -> p.nome)
+    .filter(nome -> nome.length() > 5)
+    .map(String::length);
+
+tamanho.ifPresent(t -> System.out.println("Tamanho: " + t));`,
+                        dica: "⚡ Optional.map(), filter(), flatMap() = transformações funcionais. Muito elegante!"
                     }
                 }
             ]
