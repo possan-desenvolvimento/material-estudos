@@ -104,7 +104,14 @@ const tecnologias = [
         descricao: "Automação de workflows e integrações",
         status: "🏎️ Pit Crew automatizado",
         link: "./pages/n8n.html"
-    }
+    },
+     {
+        nome: "Linguagem Devs",
+        icone: "🖥️",
+        descricao: "Automação de workflows e integrações",
+        status: "🏎️ Pit Crew automatizado",
+        link: "./pages/linguagem.html"
+    },
 ];
 
 // Função para criar os cards
